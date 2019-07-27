@@ -6,6 +6,9 @@ if(NOT CMAKE_BUILD_TYPE)
   SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build (Debug or Release)" FORCE)
 endif()
 
+set(CMAKE_SOURCE_DIR /Users/baifeng/tmxlite/OpenGLExample)
+set(TMXLITE_INCLUDE_DIR /Users/baifeng/tmxlite/tmxlite/include)
+set(TMXLITE_LIBRARIES /Users/baifeng/tmxlite/tmxlite/build/libtmxlite.dylib)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/modules/")
 SET(PROJECT_STATIC_RUNTIME FALSE CACHE BOOL "Use statically linked standard/runtime libraries?")
 #SET(PROJECT_STATIC_TMX FALSE CACHE BOOL "Use statically linked tmxlite library?")
@@ -35,13 +38,23 @@ include_directories(
   ${GLM_INCLUDE_DIR}
   src)
 
+include_directories(include)
+include_directories(/usr/local/Cellar/sdl2/2.0.9_1/include)
+include_directories(/usr/local/Cellar/sdl2_ttf/2.0.15/include)
+include_directories(/usr/local/Cellar/sdl2_mixer/2.0.4/include)
+include_directories(/usr/local/Cellar/sdl2_image/2.0.5/include)
+include_directories(/usr/local/Cellar/sdl2_gfx/1.0.4/include)
+include_directories(/usr/local/Cellar/glm/0.9.9.5/include)
+
+file(GLOB_RECURSE TMX_SOURCES "tmxlite/src/*.c" "tmxlite/src/*.cc" "tmxlite/src/*.cpp" "tmxlite/src/detail/*.cpp")
+
 SET(PROJECT_DIR ${CMAKE_SOURCE_DIR}/src)
 include(${PROJECT_DIR}/CMakeLists.txt)
 
 if(WIN32)
   add_executable(${PROJECT_NAME} WIN32 ${PROJECT_SRC})
 else()
-  add_executable(${PROJECT_NAME} ${PROJECT_SRC})
+  add_executable(${PROJECT_NAME} ${PROJECT_SRC} ${TMX_SOURCES})
 endif()
 
 target_link_libraries(${PROJECT_NAME}

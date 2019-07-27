@@ -8,3 +8,6 @@ Debug
 Release
 
 *.swp
+.idea
+build
+cmake-build-debug

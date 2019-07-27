@@ -26,8 +26,8 @@ source distribution.
 *********************************************************************/
 
 #include <Game.hpp>
-#include <OpenGL.hpp>
-#include <GLCheck.hpp>
+#include "OpenGL.hpp"
+#include "GLCheck.hpp"
 
 #include <glm/gtc/matrix_transform.hpp>
 
